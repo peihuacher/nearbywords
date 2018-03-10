@@ -36,6 +36,15 @@ def get_nearby_chars(char):
     return nearby_char[char]
 
 def generate_nearby_words(word):
+    if not word:
+        print("Error: word is empty.")
+        print("Program exit.")
+        return
+    elif len(word) < 2:
+        print("Error: words must be at least two characters.")
+        print("Program exit.")
+        return
+    
     word_nearby_char = []
     for ch in word:
         word_nearby_char.append(get_nearby_chars(ch))
