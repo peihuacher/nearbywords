@@ -23,10 +23,15 @@ def generate_perm_order(word_nearby_char, word):
     return words
 
 def get_nearby_chars(char):
-    nearby_char = {
+    nearby_char = { # nearby words in alphabetical order
         'c': ['c','b','d'],
-        'a': ['a','z','b'],
+        'a': ['a','z','b'], 
         't': ['t','s','u']
+    }
+    nearby_qwerty_char = { # nearby words in qwerty keyboard
+        'c': ['c','x','d','f','v'],
+        'a': ['a','q','w','s','x','z'],
+        't': ['t','r','5','6','y','h','g','f']
     }
     return nearby_char[char]
 
