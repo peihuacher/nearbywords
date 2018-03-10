@@ -8,13 +8,14 @@ def is_word(word):
         return False
 
 def generate_perm_order(word_nearby_char, word):
-    perm = list(itertools.product(word_nearby_char[0], word_nearby_char[1], word_nearby_char[2]))
-
+    perm = None
+    perm = list(itertools.permutations(word_nearby_char, len(word)))
+    
     words = []
     for newword in perm:
         order = False
         for i in range(len(word)):
-            if newword[i] in word_nearby_char[i]: # position character exist in order 
+            if newword[i] in get_nearby_chars(list(word)[i]): # position character exist in order 
                 order = True
             else:
                 order = False
@@ -24,8 +25,12 @@ def generate_perm_order(word_nearby_char, word):
 
 def get_nearby_chars(char):
     nearby_char = { # nearby words in alphabetical order
-        'c': ['c','b','d'],
         'a': ['a','z','b'], 
+        'b': ['b','a','c'], 
+        'c': ['c','b','d'],
+        'd': ['d','c','e'],
+        'e': ['e','d','f'],
+        'f': ['f','e','g'],
         't': ['t','s','u']
     }
     nearby_qwerty_char = { # nearby words in qwerty keyboard
@@ -34,6 +39,9 @@ def get_nearby_chars(char):
         't': ['t','r','5','6','y','h','g','f']
     }
     return nearby_char[char]
+
+def remove_duplicates(l):
+    return list(set(l))
 
 def generate_nearby_words(word):
     if not word:
@@ -44,14 +52,16 @@ def generate_nearby_words(word):
         print("Error: words must be at least two characters.")
         print("Program exit.")
         return
-    
+        
     word_nearby_char = []
-    for ch in word:
-        word_nearby_char.append(get_nearby_chars(ch))
+    for ch in list(word):
+        for cha in get_nearby_chars(ch):
+            word_nearby_char.append(cha)
     
     words = generate_perm_order(word_nearby_char, word)
     print(words)
     newwords = [word for word in words if is_word(word)]
-    print(newwords)
+    print(remove_duplicates(newwords))
+    return remove_duplicates(newwords)
     
 generate_nearby_words('cat')
