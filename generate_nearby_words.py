@@ -1,7 +1,7 @@
 import itertools
 
 def is_word(word):
-    words = ['cat', 'bat']
+    words = ['cat', 'bat', 'car']
     if word in words:
         return True
     else:
