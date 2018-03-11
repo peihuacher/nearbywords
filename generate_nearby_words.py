@@ -54,9 +54,14 @@ def generate_nearby_words(word):
         return
         
     word_nearby_char = []
-    for ch in list(word):
-        for cha in get_nearby_chars(ch):
-            word_nearby_char.append(cha)
+    try:
+        for ch in list(word):
+            for cha in get_nearby_chars(ch):
+                word_nearby_char.append(cha)
+    except:
+        print("Error: ch '", ch, "' not found. Extend the dictionary to support all letters.")
+        print("Program exit.")
+        return
     
     words = generate_perm_order(word_nearby_char, word)
     print(words)
